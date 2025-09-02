@@ -26,7 +26,7 @@ return {
 						tab_border = "#110c26",
 						sidebar = "#00000a",
 						sidebar_fg = "#ff0080",
-						float = "#04112c",
+						float = "#010612",
 						float_border = "#030f27",
 						prompt = "#ff2592",
 						scrollbar = "#0f0a26",

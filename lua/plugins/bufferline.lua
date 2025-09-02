@@ -2,6 +2,9 @@ return {
 	"akinsho/bufferline.nvim",
 	version = "*", -- or a specific tag
 	config = function()
+		--keymaps
+		vim.keymap.set("n", "gb", ":BufferLinePick<CR>", { silent = true })
+
 		require("bufferline").setup({
 			highlights = {
 				fill = { fg = "#666666", bg = "#000008" },
@@ -37,6 +40,7 @@ return {
 				seperator = false,
 				indicator_icon = " ",
 				separator_style = { "", "" },
+				pick = { alphabet = "asdfhjklg" },
 			},
 		})
 	end,
