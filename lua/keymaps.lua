@@ -1,16 +1,10 @@
 -- lua/keymaps.lua
 local map = vim.keymap.set
-<<<<<<< HEAD
-=======
-
->>>>>>> cd8d81c (keymaps and better theme and added scope.nvim to open tabs better)
 --basic
 map("n", "y", '"+y')
 map("v", "y", '"+y')
 map("x", "y", '"+y')
 map("n", "p", '"+p', { desc = "Paste from system clipboard" })
-<<<<<<< HEAD
-=======
 --Directory
 map("n", "<leader>dp", function()
 	vim.cmd.cd("..")
@@ -43,7 +37,6 @@ map("n", "<leader>dt", function()
 end, { desc = "CD to current file directory (tab)" })
 -- Help
 map("n", "<leader>K", "<Cmd>norm! K<CR>", { desc = "Keywordprg" })
->>>>>>> cd8d81c (keymaps and better theme and added scope.nvim to open tabs better)
 -- Buffers
 map("n", "<leader>.", "<Cmd>e #<CR>", { desc = "Alternate Buffer" })
 map("n", "<leader>bn", "<Cmd>bnext<CR>", { desc = "Next Buffer" })
@@ -57,10 +50,6 @@ map("n", "<leader>bo", function()
 			tab_buffers[buf] = true
 		end
 	end
-<<<<<<< HEAD
-
-=======
->>>>>>> cd8d81c (keymaps and better theme and added scope.nvim to open tabs better)
 	local function is_listable_buffer(buf)
 		if not vim.api.nvim_buf_is_valid(buf) then
 			return false
@@ -145,11 +134,8 @@ map("n", "<leader>wt", "<C-w>T", { desc = "Break out into a new tab" })
 map("n", "<leader>wh", ":split<CR>", { desc = "Horizontal Split" })
 map("n", "<leader>wv", ":vsplit<CR>", { desc = "Vertical Split" })
 -- #################Plugins################
-<<<<<<< HEAD
-=======
 -- Mason
 map("n", "<leader>cm", "<Cmd>Mason<CR>", { desc = "Mason" })
->>>>>>> cd8d81c (keymaps and better theme and added scope.nvim to open tabs better)
 --Lazy
 map("n", "<leader>l", "<Cmd>Lazy<CR>", { desc = "Lazy" })
 --Nvimtree
@@ -157,11 +143,7 @@ map("n", "<leader>e", "<Cmd>NvimTreeToggle<CR>", { desc = "NvimTree" })
 --Oil
 map("n", "<leader>o", function()
 	require("oil").open()
-<<<<<<< HEAD
-end, { desc = "Open Oil file explorer" })
-=======
 end, { desc = "Oil" })
->>>>>>> cd8d81c (keymaps and better theme and added scope.nvim to open tabs better)
 --menu
 map("n", "<C-t>", function()
 	-- Delete any old menus before opening the new one
