@@ -1,40 +1,11 @@
 return {
+
   {
     "folke/snacks.nvim",
     event = "VimEnter",
     config = function()
       local Snacks = require("snacks")
-
-      -- 🔹 Session helpers
-      local function session_name_from_cwd()
-        -- Replace \ / : with % so filenames are Windows-safe
-        return vim.fn.getcwd():gsub("[\\/:]", "%%")
-      end
-
-      local function session_file()
-        return vim.fn.stdpath("data") .. "/sessions/" .. session_name_from_cwd() .. ".vim"
-      end
-
-      local function sessions_dir()
-        return vim.fn.stdpath("data") .. "/sessions"
-      end
-
-      -- 🔹 Commands for saving/loading sessions
-      vim.api.nvim_create_user_command("SessionSave", function()
-        vim.fn.mkdir(sessions_dir(), "p") -- ensure dir exists
-        vim.cmd("mksession! " .. vim.fn.fnameescape(session_file()))
-        vim.notify("Session saved: " .. session_file())
-      end, {})
-
-      vim.api.nvim_create_user_command("SessionLoad", function()
-        local file = session_file()
-        if vim.fn.filereadable(file) == 1 then
-          vim.cmd("silent! source " .. vim.fn.fnameescape(file))
-          vim.notify("Session loaded: " .. file)
-        else
-          vim.notify("No session found for cwd: " .. vim.fn.getcwd(), vim.log.levels.WARN)
-        end
-      end, {})
+      local session_manager = require("utils.session_manager")
 
       -- 🔹 Snacks setup
       vim.api.nvim_set_hl(0, "MyIndentHL", { fg = "#938a0c" })
@@ -85,8 +56,15 @@ return {
           },
         },
         --- SCROLL ---
-        scroll = { enabled = true },
-        notifier = { enabled = true },
+        scroll = {
+          enabled = true
+        },
+        notifier = {
+          enabled = false,
+          rules = {
+            { event = "BufEnter", enabled = false },
+          },
+        },
         dashboard = {
           width = 60,
           pane_gap = 4,
@@ -117,51 +95,12 @@ return {
                 desc = "Config",
                 action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
               },
-
               {
                 icon = " ",
                 key = "s",
-                desc = "Session Picker",
+                desc = "Search Sessions",
                 action = function()
-                  local sessions_dir = vim.fn.stdpath("state") .. "/sessions" -- persistence.nvim stores here
-                  local stat = vim.loop.fs_stat(sessions_dir)
-                  if not stat or stat.type ~= "directory" then
-                    vim.notify("No sessions found at: " .. sessions_dir, vim.log.levels.ERROR)
-                    return
-                  end
-
-                  require("telescope.builtin").find_files({
-                    prompt_title = "Select a session",
-                    cwd = sessions_dir,
-                    glob_pattern = "*.vim", -- only show session files
-                    initial_mode = "normal",
-                    attach_mappings = function(_, map)
-                      local actions = require("telescope.actions")
-                      local action_state = require("telescope.actions.state")
-
-                      map("i", "<CR>", function(prompt_bufnr)
-                        local selection = action_state.get_selected_entry()
-                        actions.close(prompt_bufnr)
-                        if selection then
-                          local path = sessions_dir .. "/" .. selection.value
-                          require("persistence").load({ session = path })
-                          vim.notify("Session loaded: " .. selection.value)
-                        end
-                      end)
-
-                      map("n", "<CR>", function(prompt_bufnr)
-                        local selection = action_state.get_selected_entry()
-                        actions.close(prompt_bufnr)
-                        if selection then
-                          local path = sessions_dir .. "/" .. selection.value
-                          require("persistence").load({ session = path })
-                          vim.notify("Session loaded: " .. selection.value)
-                        end
-                      end)
-
-                      return true
-                    end,
-                  })
+                  session_manager.session_picker()
                 end,
               },
               {
@@ -246,6 +185,33 @@ return {
       map("<leader>sR", function() Snacks.picker.resume() end, "Resume")
       map("<leader>su", function() Snacks.picker.undo() end, "Undo History")
       map("<leader><Tab>s", function() Snacks.picker.pick("tabs") end, "Search Tabs")
+      Snacks.toggle({
+        name = "Session Autosave",
+        get = function()
+          return session_manager.is_autosave_enabled()
+        end,
+        set = function()
+          session_manager.toggle_autosave()
+        end,
+      }):map("<leader>Sa")
+      Snacks.toggle.line_number():map("<leader>ul")
+      Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
+      Snacks.toggle.dim():map("<leader>uD")
+      Snacks.toggle.option("spell", { name = "Spell Check" }):map("<leader>us")
+      Snacks.toggle.treesitter({ name = "Treesitter Highlighting" }):map("<leader>uT")
+      Snacks.toggle.inlay_hints():map("<leader>uh")
+      Snacks.toggle({
+        name = "Virtual Text",
+        get = function()
+          return vim.diagnostic.config().virtual_text
+        end,
+        set = function(state)
+          vim.diagnostic.config({
+            virtual_text = state,
+            signs = not state,
+          })
+        end,
+      }):map("<leader>uv")
     end,
   },
 }

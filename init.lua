@@ -1,9 +1,17 @@
+-- Debug notify override
+vim.fn.original_notify = vim.notify
+vim.notify = function(msg, level, opts)
+  if msg:match(".*:%d+:") then
+    return -- ignore buffer load position messages
+  end
+  return vim.fn.original_notify(msg, level, opts)
+end
 require("config.lazy")
 require("keymaps")
 require("config.options")
 require("recorder")
-vim.api.nvim_set_hl(0, "IblChar", { fg = "#5c6370" }) -- normal indent line
 require("utils.session_manager")
+
 vim.api.nvim_set_hl(0, "IblChar", { fg = "#5c6370" })      -- normal indent line
 vim.api.nvim_set_hl(0, "IblScopeChar", { fg = "#BFB410" }) -- current scope line
 -- Match FloatBorder background to Normal background
