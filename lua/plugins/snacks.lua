@@ -60,7 +60,7 @@ return {
           enabled = true
         },
         notifier = {
-          enabled = false,
+          enabled = true,
           rules = {
             { event = "BufEnter", enabled = false },
           },
