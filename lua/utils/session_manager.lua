@@ -126,6 +126,11 @@ function M.toggle_autosave()
   print("Autosave " .. (auto_save and "enabled" or "disabled"))
 end
 
+function M.toggle_autorestore()
+  auto_restore = not auto_restore
+  print("Autosrestore" .. (auto_restore and "enabled" or "disabled"))
+end
+
 -- Delete session
 function M.delete_session(name)
   if not name or name == config.last_session then
@@ -179,7 +184,7 @@ function M.setup(opts)
         end
         M.save_session(input)
       end
-    end)
+    end) -- closes the vim.ui.input callback
   end, { desc = "Save Session", silent = true })
 
   --snacks function autosave
@@ -187,13 +192,17 @@ function M.setup(opts)
     return auto_save
   end
 
-  --  -- Snacks toggle for autosave
+  function M.is_autorestore_enabled()
+    return auto_restore
+  end
+
+  --  -- Snacks toggle for autosave(commented because its defined in snacks.lua instead)
   -- -- require("snacks")
   --   --   .toggle({
   --     --   name = "Session Autosave",
   --       -- get = function()
   --         -- return auto_save
-  --        --end,
+
   --       -- set = function()
   --         -- auto_save = not auto_save
   --        end,
