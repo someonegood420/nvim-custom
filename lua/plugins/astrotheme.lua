@@ -187,6 +187,8 @@ return {
 					["SnacksDashboardGitType"] = { fg = "#FF2592", bg = "none" },
 					["SnacksDashboardGitBranch"] = { fg = "#FF2592", bg = "none" },
 					["FloatTitle"] = { fg = "#FF2592", bg = "none" },
+					["NvimTreeRootFolder"] = { fg = "#ee984d", bg = "none" },
+					["NvimTreeEndOfBuffer"] = { fg = "#ee984d", bg = "none" },
 				},
 			},
 			palette = "astrodark",
