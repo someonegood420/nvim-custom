@@ -189,7 +189,6 @@ function M.setup(opts)
 
   --snacks function autosave
   function M.is_autosave_enabled()
-    return auto_save
   end
 
   function M.is_autorestore_enabled()

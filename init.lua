@@ -11,6 +11,8 @@ require("keymaps")
 require("config.options")
 require("recorder")
 require("utils.session_manager")
+require('scrollEOF').setup()
+require("utils.Beacon").setup()
 
 vim.api.nvim_set_hl(0, "IblChar", { fg = "#5c6370" })      -- normal indent line
 vim.api.nvim_set_hl(0, "IblScopeChar", { fg = "#BFB410" }) -- current scope line
@@ -22,4 +24,4 @@ vim.api.nvim_set_hl(0, "OilHeader", { bg = "none", fg = "#ffffff" }) -- header
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })                    -- main Oil buffer
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })               -- if float window
 vim.cmd("runtime plugin/matchparen.vim")
-vim.api.nvim_set_hl(0, "CursorLine", { bg = "none" })                -- optional
+vim.api.nvim_set_hl(0, "CursorLine", { bg = "#06060d" })             -- optional
