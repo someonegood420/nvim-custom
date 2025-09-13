@@ -9,7 +9,7 @@ end
 require("config.lazy")
 require("keymaps")
 require("config.options")
-require("recorder")
+require("utils.recorder")
 require("utils.session_manager")
 require('scrollEOF').setup()
 require("utils.Beacon").setup()

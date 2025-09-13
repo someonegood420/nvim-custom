@@ -19,7 +19,7 @@ return {
     -- Setup Mason
     require("mason").setup()
     require("mason-lspconfig").setup({
-      ensure_installed = { "lua_ls", "basedpyright" },
+      ensure_installed = { "lua_ls"},
       automatic_installation = true,
     })
     vim.api.nvim_create_autocmd("LspAttach", {
@@ -78,9 +78,5 @@ return {
       },
     })
 
-    -- Python LSP
-    lspconfig.basedpyright.setup({
-      capabilities = capabilities,
-    })
   end,
 }

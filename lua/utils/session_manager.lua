@@ -126,11 +126,6 @@ function M.toggle_autosave()
   print("Autosave " .. (auto_save and "enabled" or "disabled"))
 end
 
-function M.toggle_autorestore()
-  auto_restore = not auto_restore
-  print("Autosrestore" .. (auto_restore and "enabled" or "disabled"))
-end
-
 -- Delete session
 function M.delete_session(name)
   if not name or name == config.last_session then
@@ -189,10 +184,6 @@ function M.setup(opts)
 
   --snacks function autosave
   function M.is_autosave_enabled()
-  end
-
-  function M.is_autorestore_enabled()
-    return auto_restore
   end
 
   --  -- Snacks toggle for autosave(commented because its defined in snacks.lua instead)

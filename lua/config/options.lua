@@ -1,31 +1,32 @@
-local opt     = vim.opt
-local o       = vim.o
-local g       = vim.g
+local opt        = vim.opt
+local o          = vim.o
+local g          = vim.g
 
 -------------------------------------- options ------------------------------------------
-o.laststatus  = 3
-o.showmode    = true
-o.splitkeep   = "screen"
-opt.scrolloff = 5
-o.clipboard   = "unnamedplus"
-o.cursorline  = true
+o.laststatus     = 3
+o.showmode       = true
+o.splitkeep      = "screen"
+opt.scrolloff    = 0
+o.clipboard      = "unnamedplus"
+o.cursorline     = true
+o.swapfile       = false
 -- Indenting
-o.expandtab   = true
-o.shiftwidth  = 2
-o.smartindent = true
-o.tabstop     = 2
-o.softtabstop = 2
+o.expandtab      = true
+o.shiftwidth     = 2
+o.smartindent    = true
+o.tabstop        = 2
+o.softtabstop    = 2
 
-opt.fillchars = { eob = " " }
-o.ignorecase  = true
-o.smartcase   = true
-o.mouse       = "a"
+opt.fillchars    = { eob = " " }
+o.ignorecase     = true
+o.smartcase      = true
+o.mouse          = "a"
 
 -- Numbers
-o.number      = true
-o.numberwidth = 2
-o.ruler       = false
-
+o.number         = true
+o.numberwidth    = 2
+o.ruler          = false
+o.relativenumber = true
 -- disable nvim intro
 opt.shortmess:append "sI"
 

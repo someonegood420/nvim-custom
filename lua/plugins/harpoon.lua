@@ -2,8 +2,8 @@ return {
   {
     "ThePrimeagen/harpoon",
     keys = {
-      { "<leader>v", function() require("harpoon.mark").add_file() end,        desc = "Harp-Mark" },
-      { "<leader>h", function() require("harpoon.ui").toggle_quick_menu() end, desc = "Harpoon-menu" },
+      { "<leader>v", function() require("harpoon.mark").add_file() end,        desc = "HarpMark" },
+      { "<leader>h", function() require("harpoon.ui").toggle_quick_menu() end, desc = "HarpMenu" },
       { "<leader>1", function() require("harpoon.ui").nav_file(1) end,         desc = "file 1" },
       { "<leader>2", function() require("harpoon.ui").nav_file(2) end,         desc = "file 2" },
       { "<leader>3", function() require("harpoon.ui").nav_file(3) end,         desc = "file 3" },

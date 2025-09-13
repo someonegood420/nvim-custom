@@ -9,6 +9,10 @@ return {
       show_help = true,
       spec = {
         -- individual keymaps
+        { "<leader>q", name = "Save & Quit", hidden = true },
+        { "<leader>Q", name = "Quit without save", hidden = true },
+        { "<leader>w", name = "write", hidden = true },
+        { "<leader>W", name = "write all", hidden = true },
         { "<leader>rt", icon = { icon = "", hl = "MiniIconsRed" } },
         { "<leader>ta", icon = { icon = "󰱑", hl = "MiniIconsGreen" } },
         { "<leader>tf", icon = { icon = "󰱑", hl = "MiniIconsGreen" } },
@@ -16,6 +20,7 @@ return {
         { "<leader>a", icon = { icon = "", hl = "MiniIconsYellow" } },
         { "<leader>cm", icon = { icon = "󱁤", hl = "MiniIconsGrey" } },
         { "<leader>e", icon = { icon = "󰨚", hl = "MiniIconsYellow" } },
+        { "<leader>.", icon = { icon = "", hl = "MiniIconsBlue" } },
         { "<leader><leader>", desc = "Beacon", icon = { icon = "󰞏", hl = "MiniIconsYellow" } },
         -- groups
         { "<leader>b", group = "Buffer" },
@@ -23,7 +28,7 @@ return {
         { "<leader>f", group = "File/Find" },
         { "<leader>g", group = "Git" },
         { "<leader>gh", group = "Hunks" },
-        { "<leader>d", group = "Directory" },
+        { "<leader>d", group = "Directory", icon = { icon = "󱧮", hl = "MiniIconsGreen" } },
         { "<leader>n", group = "Noice" },
         { "<leader>r", group = "Run", icon = { icon = "", hl = "MiniIconsRed" } },
         { "<leader>s", group = "Search" },
@@ -31,10 +36,10 @@ return {
         { "<leader>t", group = "Test", icon = { icon = "󰱑", hl = "MiniIconsGreen" } },
         { "<leader>T", group = "Terminal" },
         { "<leader>u", group = "UI" },
-        { "<leader>w", group = "Window" },
-        { "<leader>x", group = "Diag/Qckfix" },
+        { "<leader>i", group = "Window" },
+        { "<leader>x", group = "Diag/Qckfix", icon = { icon = "󰀩", hl = "MiniIconsRed" } },
         { "<leader><Tab>", group = "Tab" },
-        { "<leader>?", group = "Funstuff" },
+        { "<leader>?", group = "Funstuff", icon = { icon = "󱁖", hl = "MiniIconsRed" } },
       },
     },
     config = function(_, opts)
