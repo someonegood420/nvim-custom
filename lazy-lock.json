@@ -35,6 +35,7 @@
   "store.nvim": { "branch": "main", "commit": "1359fe210f619f8e54cb4bc5fdcc40c1edc18876" },
   "telescope.nvim": { "branch": "master", "commit": "a0bbec21143c7bc5f8bb02e0005fa0b982edc026" },
   "transparent.nvim": { "branch": "main", "commit": "8ac59883de84e9cd1850ea25cf087031c5ba7d54" },
+  "treesj": { "branch": "main", "commit": "925b506eadd9b465e6e577bb684d86e9863a2e21" },
   "trouble.nvim": { "branch": "main", "commit": "85bedb7eb7fa331a2ccbecb9202d8abba64d37b3" },
   "typr": { "branch": "main", "commit": "bdd9ef7143702851edd1dac85101e0a537056d2f" },
   "vim-illuminate": { "branch": "master", "commit": "0d1e93684da00ab7c057410fecfc24f434698898" },

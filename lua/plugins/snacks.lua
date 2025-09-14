@@ -57,7 +57,7 @@ return {
 				},
 				--- SCROLL ---
 				scroll = {
-					enabled = true,
+					enabled = false,
 				},
 				notifier = {
 					enabled = true,
@@ -66,26 +66,27 @@ return {
 					},
 				},
 				dashboard = {
-					width = 60,
-					pane_gap = 4,
+					width = 126,
+					height = 90,
+					pane_gap = 0,
 					preset = {
 						keys = {
 							{
 								icon = " ",
 								key = "f",
-								desc = "Find File",
+								desc = "Files",
 								action = ":lua Snacks.dashboard.pick('files')",
 							},
 							{ icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
 							{
 								icon = " ",
 								key = "g",
-								desc = "Find Text",
+								desc = "Grep",
 								action = ":lua Snacks.dashboard.pick('live_grep')",
 							},
 							{
 								icon = " ",
-								key = "r",
+								key = "o",
 								desc = "Recent Files",
 								action = ":lua Snacks.dashboard.pick('oldfiles')",
 							},
@@ -98,7 +99,7 @@ return {
 							{
 								icon = " ",
 								key = "s",
-								desc = "Search Sessions",
+								desc = "Session pick",
 								action = function() session_manager.session_picker() end,
 							},
 							{
@@ -112,22 +113,25 @@ return {
 						},
 					},
 					sections = {
-						{ section = "keys", gap = 1, padding = 1 },
+						{
+							pane = 1,
+							section = "terminal",
+							cmd = 'img2art "C:/Users/ahad/AppData/Local/nvim/lua/plugins/dashboardgirl.jpg" --scale 0.37 --with-color --threshold 50',
+							height = 51,
+							width = 120,
+						},
+						{ pane = 2, section = "keys" },
 						{
 							pane = 2,
 							icon = " ",
 							title = "Recent Files",
 							section = "recent_files",
-							indent = 2,
-							padding = 1,
 						},
 						{
 							pane = 2,
 							icon = " ",
 							title = "Projects",
 							section = "projects",
-							indent = 2,
-							padding = 1,
 						},
 						{
 							pane = 2,
@@ -139,9 +143,7 @@ return {
 							height = 5,
 							padding = 1,
 							ttl = 5 * 60, -- refresh every 5 min
-							indent = 3,
 						},
-						{ section = "startup" },
 					},
 				},
 			})
@@ -207,6 +209,8 @@ return {
 			Snacks.toggle.option("spell", { name = "Spell Check" }):map("<leader>us")
 			Snacks.toggle.treesitter({ name = "Treesitter Highlighting" }):map("<leader>uT")
 			Snacks.toggle.inlay_hints():map("<leader>uh")
+			Snacks.toggle.indent():map("<leader>uI")
+			Snacks.toggle.scroll():map("<leader>uR")
 			Snacks.toggle({
 				name = "Virtual Text",
 				get = function() return vim.diagnostic.config().virtual_text end,
