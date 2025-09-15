@@ -6,6 +6,7 @@ return {
 		config = function()
 			local Snacks = require("snacks")
 			local session_manager = require("utils.session_manager")
+			local tab_picker = require("utils.s_tab_picker")
 
 			-- 🔹 Snacks setup
 			vim.api.nvim_set_hl(0, "MyIndentHL", { fg = "#938a0c" })
@@ -17,6 +18,7 @@ return {
 						hl = "SnacksIndent3",
 					},
 				},
+				lazygit = { enabled = true },
 				--- PICKER ---
 				picker = {
 					enabled = true,
@@ -53,6 +55,7 @@ return {
 						icons = {
 							layout = { preset = "select" },
 						},
+						tabs = tab_picker,
 					},
 				},
 				--- SCROLL ---

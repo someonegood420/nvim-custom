@@ -160,10 +160,14 @@ vim.keymap.set("n", "<leader>uS", function()
 	end
 end, { desc = "Toggle scrolloff" })
 -- #################Plugins################
+-- buffer list
+map("n", "<leader>l", function() require("utils.buffer_picker").toggle() end, { desc = "l-Buff" })
+-- tab list
+map("n", "<leader>L", function() require("utils.tab_picker").toggle() end, { desc = "L-Tab" })
 -- Mason
 map("n", "<leader>cm", "<Cmd>Mason<CR>", { desc = "Mason" })
 --Lazy
-map("n", "<leader>l", "<Cmd>Lazy<CR>", { desc = "Lazy" })
+map("n", "<leader>cl", "<Cmd>Lazy<CR>", { desc = "Lazy" })
 --Nvimtree
 map("n", "<leader>e", "<Cmd>NvimTreeToggle<CR>", { desc = "NvimTree" })
 --Oil
