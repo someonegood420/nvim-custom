@@ -1,6 +1,7 @@
 return {
 	{
 		"stevearc/conform.nvim",
+		event = { "BufReadPre", "BufNewFile" },
 		opts = {
 			-- Format on save
 			format_on_save = {

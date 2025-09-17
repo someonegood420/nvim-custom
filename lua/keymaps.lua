@@ -165,48 +165,8 @@ map("n", "<leader>l", function() require("utils.buffer_picker").toggle() end, { 
 -- tab list
 map("n", "<leader>L", function() require("utils.tab_picker").toggle() end, { desc = "L-Tab" })
 -- Mason
-map("n", "<leader>cm", "<Cmd>Mason<CR>", { desc = "Mason" })
 --Lazy
 map("n", "<leader>cl", "<Cmd>Lazy<CR>", { desc = "Lazy" })
---Nvimtree
-map("n", "<leader>e", "<Cmd>NvimTreeToggle<CR>", { desc = "NvimTree" })
---Oil
-map("n", "<leader>o", function() require("oil").open() end, { desc = "Oil" })
---menu
-map("n", "<C-t>", function()
-	-- Delete any old menus before opening the new one
-	require("menu.utils").delete_old_menus()
-
-	local buf = vim.api.nvim_get_current_buf()
-
-	-- Check if the current buffer is NvimTree
-	if vim.bo[buf].ft == "NvimTree" then
-		require("menu").open("nvimtree")
-	else
-		require("menu").open("default")
-	end
-end, { desc = "Open menu based on buffer type" })
-
--- Mouse users + nvimtree users
-map({ "n", "v" }, "<RightMouse>", function()
-	-- Delete old menus before opening a new one
-	require("menu.utils").delete_old_menus()
-
-	-- Print the filetype of the clicked buffer
-	local buf = vim.api.nvim_win_get_buf(vim.fn.getmousepos().winid)
-
-	-- Determine which menu to open based on buffer type
-	local options = vim.bo[buf].ft == "NvimTree" and "nvimtree" or "default"
-
-	-- Open the determined menu
-	require("menu").open(options, { mouse = true })
-end, { desc = "Open menu based on right-click buffer" })
-
---Telescope
-local builtin = require("telescope.builtin")
-map("n", "<leader>fl", builtin.live_grep, { desc = "T-scope Grep" })
-map("n", "<leader>fd", builtin.current_buffer_fuzzy_find, { desc = "Tscope-fzf" })
-
 -- Commenting
 map("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
 map("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })

@@ -2,7 +2,7 @@ return {
 
 	{
 		"folke/snacks.nvim",
-		event = "VimEnter",
+		lazy = false,
 		config = function()
 			local Snacks = require("snacks")
 			local session_manager = require("utils.session_manager")
@@ -17,6 +17,9 @@ return {
 					scope = {
 						hl = "SnacksIndent3",
 					},
+				},
+				bigfile = {
+					enabled = true,
 				},
 				lazygit = { enabled = true },
 				--- PICKER ---
@@ -56,108 +59,35 @@ return {
 							layout = { preset = "select" },
 						},
 						tabs = tab_picker,
+						explorer = {
+							layout = {
+								layout = {
+									position = "right",
+								},
+							},
+						},
 					},
 				},
 				--- SCROLL ---
-				scroll = {
-					enabled = false,
-				},
 				notifier = {
 					enabled = true,
 					rules = {
 						{ event = "BufEnter", enabled = false },
 					},
 				},
-				dashboard = {
-					width = 126,
-					height = 90,
-					pane_gap = 0,
-					preset = {
-						keys = {
-							{
-								icon = " ",
-								key = "f",
-								desc = "Files",
-								action = ":lua Snacks.dashboard.pick('files')",
-							},
-							{ icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
-							{
-								icon = " ",
-								key = "g",
-								desc = "Grep",
-								action = ":lua Snacks.dashboard.pick('live_grep')",
-							},
-							{
-								icon = " ",
-								key = "o",
-								desc = "Recent Files",
-								action = ":lua Snacks.dashboard.pick('oldfiles')",
-							},
-							{
-								icon = " ",
-								key = "c",
-								desc = "Config",
-								action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
-							},
-							{
-								icon = " ",
-								key = "s",
-								desc = "Session pick",
-								action = function() session_manager.session_picker() end,
-							},
-							{
-								icon = "󰒲 ",
-								key = "L",
-								desc = "Lazy",
-								action = ":Lazy",
-								enabled = package.loaded.lazy ~= nil,
-							},
-							{ icon = " ", key = "q", desc = "Quit", action = ":qa" },
-						},
-					},
-					sections = {
-						{
-							pane = 1,
-							section = "terminal",
-							cmd = 'img2art "C:/Users/ahad/AppData/Local/nvim/lua/plugins/dashboardgirl.jpg" --scale 0.37 --with-color --threshold 50',
-							height = 51,
-							width = 120,
-						},
-						{ pane = 2, section = "keys" },
-						{
-							pane = 2,
-							icon = " ",
-							title = "Recent Files",
-							section = "recent_files",
-						},
-						{
-							pane = 2,
-							icon = " ",
-							title = "Projects",
-							section = "projects",
-						},
-						{
-							pane = 2,
-							icon = " ",
-							title = "Git Status",
-							section = "terminal",
-							enabled = function() return Snacks.git.get_root() ~= nil end,
-							cmd = "git status --short --branch --renames",
-							height = 5,
-							padding = 1,
-							ttl = 5 * 60, -- refresh every 5 min
-						},
-					},
-				},
 			})
 			local map = function(lhs, rhs, desc) vim.keymap.set("n", lhs, rhs, { desc = desc }) end
         -- stylua: ignore start
 			map("<leader>bc", function() Snacks.bufdelete() end, "Close Buff")
+      	-- Map <leader>a to toggle the sidebar	-- Map <leader>a to toggle the sidebar
+      map("<leader>o","<cmd>Oil --float<CR>" , "Oil" )
+		  map("<leader>a", "<cmd>AerialToggle<CR>", "Aerial" )
+      map("<leader>cm", "<Cmd>Mason<CR>", "Mason" )
       -- #find
 			map("<leader>F", function() Snacks.picker.smart() end, "Smart find")
 			map("<leader>fc", function() Snacks.picker.lines() end, "buff line")
 			map("<leader>fC", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config"), title = "Config Files" }) end, "Config Files")
-			map("<leader>fe", function() Snacks.explorer() end, "File Explorer")
+			map("<leader>e", function() Snacks.explorer() end, "File Explorer")
 			map("<leader>ff", function() Snacks.picker.files() end, "Files")
 			map("<leader>fF", function() Snacks.picker.files({ hidden = true }) end, "All Files")
 			map("<leader>gf", function() Snacks.picker.git_files() end, "Git Files")
