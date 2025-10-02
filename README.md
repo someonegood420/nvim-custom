@@ -33,8 +33,10 @@ Held together with duct tape.
 - [ ] Status Column
 - [ ] Dropbar menu 
 - [ ] smooth scroll with neoscroll
-- [ ] In-Buffer Navigation
+- [x] In-Buffer Navigation with flash
 - [ ] Debloated
+- [x] BetterMacros with NeoComposer.nvim
+- [x] Buffer timeline,snapshots and undotree with Traceback
 #### Telescope 
 - [x] fuzzy finding in buffer
 - [x] live grep
@@ -72,6 +74,9 @@ Held together with duct tape.
 - [scrollEOF.nvim](https://github.com/Aasim-A/scrollEOF.nvim)
 - [trouble.nvim](https://github.com/folke/trouble.nvim)
 - [treesj](https://github.com/Wansmer/treesj)
+- [Traceback](https://github.com/theawakener0/TraceBack)
+- [NeoComposer.nvim](https://github.com/ecthelionvi/NeoComposer.nvim)
+
 #### UI
 - [bufferline.nvim](https://github.com/akinsho/bufferline.nvim)
 - [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
