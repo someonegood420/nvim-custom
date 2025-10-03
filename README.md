@@ -19,7 +19,7 @@ Held together with duct tape.
 - [x] Quick Tab navigation with custom tab picker
 - [x] Quick mark and file navigation with Harpoon
 - [x] Symbol navigation with aerial
-- [x] Statusbar at the bottom with `cwd` ,git info,Diagnostics and time with heirline
+- [x] Statusbar at the bottom with pretty filepath, `cwd` ,git info,Diagnostics and time with heirline
 - [x] Buffers and tabs on the top with Bufferline
 - [x] Transparency
 - [x] Reference highlighting with vim-illuminate
@@ -29,11 +29,11 @@ Held together with duct tape.
 - [x] Mouse actions with menu(half done,only works in nvim-tree and files)
 - [x] Split/join code structures with treesj
 - [x] Git integration via gitsigns
-- [ ] Git integration via Lazygit
-- [ ] Status Column
+- [x] Git integration via Snacks's Lazygit
+- [x] Status Column with Snacks(Left -> git,marks,diagnostics(if enabled) Right -> folds)
 - [ ] Dropbar menu 
 - [ ] smooth scroll with neoscroll
-- [x] In-Buffer Navigation with flash
+- [x] In-Buffer Navigation with flash.nvim
 - [ ] Debloated
 - [x] BetterMacros with NeoComposer.nvim
 - [x] Buffer timeline,snapshots and undotree with Traceback
@@ -65,6 +65,7 @@ Held together with duct tape.
 - [mason.nvim](https://github.com/williamboman/mason.nvim)
 #### Utils
 - [aerial.nvim](https://github.com/stevearc/aerial.nvim)
+- [flash.nvim](https://github.com/folke/flash.nvim)
 - [snacks.nvim](https://github.com/folke/snacks.nvim)
 - [harpoon](https://github.com/ThePrimeagen/harpoon)
 - [oil.nvim](https://github.com/stevearc/oil.nvim)

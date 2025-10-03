@@ -9,6 +9,109 @@ map("n", "<leader>q", "<Cmd>x<CR>", { desc = "Save and quit" })
 map("n", "<leader>Q", "<Cmd>q!<CR>")
 map("n", "<leader>w", "<Cmd>w<CR>")
 map("n", "<leader>W", "<Cmd>wall<CR>")
+--Macro
+map("n", "<leader>m1", "GVggy", { desc = "Copy file" })
+map("n", "<leader>m2", "GVggp", { desc = "Paste file" })
+map("n", "<leader>m3", "GVggd", { desc = "Delete file" })
+--Marks
+local last_global_jump = { mark = nil, file = nil, line = nil }
+-- Toggle/jump/clear marks
+local function toggle_or_jump(mark)
+	if mark:match("%u") then
+		-- 🔹 GLOBAL MARK (A-Z)
+		local found = nil
+		for _, m in ipairs(vim.fn.getmarklist()) do
+			if m.mark == "'" .. mark then -- Marks in getmarklist() are prefixed with '
+				found = m
+				break
+			end
+		end
+
+		if found then
+			local curfile = vim.fn.expand("%:p") -- current file full path
+			local mark_file = vim.fn.fnamemodify(found.file, ":p") -- normalize
+			local cursor = vim.api.nvim_win_get_cursor(0) -- {line, col}
+			local line, col = found.pos[2], found.pos[3]
+
+			-- Are we exactly on the mark line? (loose check)
+			local at_mark_line = (curfile == mark_file and cursor[1] == line)
+
+			-- Did we just jump to this same global mark previously and haven't moved?
+			local just_jumped_same = (
+				last_global_jump.mark == mark
+				and last_global_jump.file == mark_file
+				and cursor[1] == last_global_jump.line
+			)
+
+			if at_mark_line or just_jumped_same then
+				-- Clear the global mark using :delmarks
+				vim.cmd("delmarks " .. mark)
+				vim.notify("Global mark " .. mark .. " cleared", vim.log.levels.INFO)
+				-- reset tracker
+				last_global_jump.mark = nil
+				last_global_jump.file = nil
+				last_global_jump.line = nil
+			else
+				-- Jump to the mark (open file if needed)
+				local success, err = pcall(function()
+					if curfile ~= mark_file then vim.cmd("edit " .. vim.fn.fnameescape(found.file)) end
+					vim.api.nvim_win_set_cursor(0, { line, col })
+				end)
+				if not success then
+					vim.notify("Failed to jump to global mark " .. mark .. ": " .. err, vim.log.levels.ERROR)
+				else
+					-- record that we just jumped to this global mark so a follow-up press can clear it
+					last_global_jump.mark = mark
+					last_global_jump.file = mark_file
+					last_global_jump.line = line
+					vim.notify("Jumped to global mark " .. mark, vim.log.levels.INFO)
+				end
+			end
+		else
+			-- No mark yet -> set it
+			vim.cmd("normal! m" .. mark)
+			vim.notify("Global mark " .. mark .. " set", vim.log.levels.INFO)
+		end
+	else
+		-- 🔹 LOCAL MARK (a-z)
+		local pos = vim.api.nvim_buf_get_mark(0, mark)
+		local cursor = vim.api.nvim_win_get_cursor(0)
+
+		if pos[1] > 0 then
+			if pos[1] == cursor[1] and pos[2] == cursor[2] then
+				-- Cursor is at the mark's position -> clear it
+				vim.api.nvim_buf_del_mark(0, mark)
+				vim.notify("Local mark " .. mark .. " cleared", vim.log.levels.INFO)
+			else
+				-- Jump to local mark
+				vim.api.nvim_win_set_cursor(0, { pos[1], pos[2] })
+				vim.notify("Jumped to local mark " .. mark, vim.log.levels.INFO)
+			end
+		else
+			-- Set new local mark
+			vim.cmd("normal! m" .. mark)
+			vim.notify("Local mark " .. mark .. " set", vim.log.levels.INFO)
+		end
+	end
+end
+-- Mark-related mappings
+map("n", "<leader>jk", "`", { desc = "Jump" })
+map("n", "<leader>jj", "m", { desc = "Mark" })
+map("n", "<leader>j1", function() toggle_or_jump("z") end, { desc = "Mark z (local)" })
+map("n", "<leader>j2", function() toggle_or_jump("x") end, { desc = "Mark x (local)" })
+map("n", "<leader>j3", function() toggle_or_jump("c") end, { desc = "Mark c (local)" })
+map("n", "<leader>j4", function() toggle_or_jump("v") end, { desc = "Mark v (local)" })
+map("n", "<leader>J1", function() toggle_or_jump("Z") end, { desc = "Mark Z (global)" })
+map("n", "<leader>J2", function() toggle_or_jump("X") end, { desc = "Mark X (global)" })
+map("n", "<leader>J3", function() toggle_or_jump("C") end, { desc = "Mark C (global)" })
+map("n", "<leader>J4", function() toggle_or_jump("V") end, { desc = "Mark V (global)" })
+map("n", "<leader>jh", "<C-o>", { desc = "Prev" })
+map("n", "<leader>jn", "<C-i>", { desc = "Next" })
+map("n", "<leader>jl", "``", { desc = "Cycle" })
+map("n", "<leader>jd", "g;", { desc = "PrevC" })
+map("n", "<leader>js", "g.", { desc = "NextC" })
+map("n", "<leader>jf", "`.", { desc = "LastC" })
+map("n", "<leader>ja", "`^", { desc = "Edit" })
 --Directory
 --for Cding into directories
 map("n", "<leader>dD", function() vim.cmd.cd("..") end, { desc = "parent path" })
@@ -16,7 +119,7 @@ map("n", "<leader>dD", function() vim.cmd.cd("..") end, { desc = "parent path" }
 map("n", "<leader>dd", function()
 	if vim.api.nvim_buf_get_name(0) ~= "" then vim.cmd.cd(vim.fn.expand("%:p:h")) end
 end, { desc = "file path" })
---Window-local
+--Window-llocal
 map("n", "<leader>dW", function() vim.cmd.lcd("..") end, { desc = "window parent path" })
 
 map("n", "<leader>dw", function()
