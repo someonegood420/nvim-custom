@@ -1,3 +1,5 @@
+vim.g.sqlite_clib_path =
+'C:/Users/Home_Thinkpad/sqlite-dll-win-x64-3500400/sqlite3.dll' -- Use forward slashes; adjust path as needed
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -21,7 +23,7 @@ require("lazy").setup({
   spec = {
     { import = "plugins" },
   },
-  checker = { enabled = true },
+  checker = { enabled = false },
   ui = {
     border = "rounded",
     backdrop = 100,

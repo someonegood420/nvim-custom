@@ -19,7 +19,7 @@ Held together with duct tape.
 - [x] Quick Tab navigation with custom tab picker
 - [x] Quick mark and file navigation with Harpoon
 - [x] Symbol navigation with aerial
-- [x] Statusbar at the bottom with pretty filepath, `cwd` ,git info,Diagnostics and time with heirline
+- [x] Statusbar at the bottom with `cwd` ,git info,Diagnostics and time with heirline
 - [x] Buffers and tabs on the top with Bufferline
 - [x] Transparency
 - [x] Reference highlighting with vim-illuminate
